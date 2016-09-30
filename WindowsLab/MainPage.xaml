@@ -1,0 +1,60 @@
+﻿<Page
+    x:Class="WindowsLab.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:WindowsLab"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <VisualStateManager.VisualStateGroups>
+        <VisualStateGroup>
+            <VisualState x:Name="desktopState">
+                <VisualState.StateTriggers>
+                    <AdaptiveTrigger MinWindowWidth="641" />
+                </VisualState.StateTriggers>
+                <VisualState.Setters>
+                    <Setter Target="Splitter.DisplayMode" Value="Inline"/>
+                </VisualState.Setters>
+            </VisualState>
+            <VisualState x:Name="mobileState">
+                <VisualState.StateTriggers>
+                    <AdaptiveTrigger MinWindowWidth="0" />
+                </VisualState.StateTriggers>
+                <VisualState.Setters>
+                    <Setter Target="Splitter.DisplayMode" Value="Overlay"/>
+                </VisualState.Setters>
+            </VisualState>
+        </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <SplitView x:Name="Splitter" IsPaneOpen="True" Grid.Column="1">
+            <SplitView.Pane>
+                <RelativePanel Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}">
+                    <StackPanel x:Name="HeaderPanel" Orientation="Horizontal">
+                        <Image x:Name="WindowsLogo" Stretch="None" Source="Assets/windows-toolbox.png" Margin="0,15,0,0" />
+                        <TextBlock x:Name="Header" x:Uid="/Resources/Header" Style="{StaticResource HeaderTextStyle}" Margin="5,15,0,0" />
+                    </StackPanel>
+
+                    <StackPanel x:Name="FooterPanel" Orientation="Vertical" RelativePanel.AlignBottomWithPanel="True">
+                        <Image Source="Assets/imgur-small.png" AutomationProperties.Name="ImgurLogo" Stretch="None" HorizontalAlignment="Left" Margin="10,0,0,5"/>
+                    </StackPanel>
+                </RelativePanel>
+            </SplitView.Pane>
+            <RelativePanel>
+            <ContentControl x:Name="mainContent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5"/>
+            </RelativePanel>
+        </SplitView>
+        <Border Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}">
+            <ToggleButton Style="{StaticResource SymbolButton}" Click="Button_Click" VerticalAlignment="Top" Foreground="{ThemeResource ApplicationForegroundThemeBrush}">
+                <ToggleButton.Content>
+                    <FontIcon x:Name="Hamburger" FontFamily="Segoe MDL2 Assets" Glyph="&#xE700;" Margin="0,10,0,0"/>
+                </ToggleButton.Content>
+            </ToggleButton>
+        </Border>
+    </Grid>
+</Page>
